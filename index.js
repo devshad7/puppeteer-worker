@@ -14,7 +14,15 @@ app.post("/order", async (req, res) => {
 
   try {
     const url = `https://www.amazon.in/dp/${asin}`;
-    const browser = await puppeteer.launch({ headless: false }); // use `true` for Render
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu"
+      ],
+    });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
 
