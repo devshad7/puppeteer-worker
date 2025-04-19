@@ -18,6 +18,7 @@ app.post("/order", async (req, res) => {
     console.log("Launching browser...");
     browser = await puppeteer.launch({
       headless: true, // Set to false to watch the browser
+      executablePath: puppeteer.executablePath(),
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
